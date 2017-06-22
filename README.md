@@ -1,13 +1,13 @@
-# Project Name
+# Thumbs Check
 
-> Pithy project description
+> An in-lecture thumbs checker.
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Rob St. Lezin
+  - Michael Clausen
+  - Shyan Kashani
+  - Chris Aaker
 
 ## Table of Contents
 
