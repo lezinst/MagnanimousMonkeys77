@@ -1,35 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import Login from './components/Login.jsx';
+import Student from './components/Student.jsx';
+import Instructor from './components/Instructor.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      items: []
+    this.state = {
+      view: 'login'
     }
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-  }
-
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
+    return (
+      <div>
+        <nav className="navbar navbar-default">
+          <span className="navbar-brand">Thumbs Check</span>
+        </nav>
+        <div className="row">
+          <div className="col-xs-10">
+            {this.state.view === 'login'
+              ? <Login />
+              : this.state.view === 'student'
+              ? <Student />
+              : <Instructor /> }
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 
