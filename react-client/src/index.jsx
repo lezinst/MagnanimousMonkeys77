@@ -4,6 +4,8 @@ import $ from 'jquery';
 import List from './components/List.jsx';
 import Waiting from './components/Waiting.jsx';
 import ClearThumbsButton from './components/ClearThumbsButton.jsx';
+import CheckThumbsButton from './components/CheckThumbsButton.jsx';
+
 
 
 class App extends React.Component {
@@ -32,7 +34,6 @@ class App extends React.Component {
     return (<div>
       <h1>Item List</h1>
       <List items={this.state.items}/>
-
     </div>)
   }
 }
