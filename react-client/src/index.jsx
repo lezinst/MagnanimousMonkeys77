@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import Waiting from './components/Waiting.jsx';
+import ClearThumbsButton from './components/ClearThumbsButton.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
