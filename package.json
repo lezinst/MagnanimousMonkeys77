@@ -4,8 +4,10 @@
   "description": "An in-lecture thumbs checker.",
   "main": ".eslintrc.js",
   "scripts": {
-    "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "start": {
+      "react-dev": "webpack -d --watch",
+      "server-dev": "nodemon server/index.js"
+    }
   },
   "author": "MagnanimousMonkeys77",
   "license": "ISC",
@@ -22,6 +24,7 @@
     "express": "^4.15.0",
     "jquery": "^3.1.1",
     "mysql": "^2.13.0",
+    "node": "0.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "socket.io": "^2.0.3"
