@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'login'
+      view: 'student'
     }
   }
 
@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-default">
-          <span className="navbar-brand">Thumbs Check</span>
+          <span className="navbar-brand">ThumbsCheck</span>
         </nav>
         <div className="row">
           <div className="col-xs-10">

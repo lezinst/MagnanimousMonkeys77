@@ -1,20 +1,21 @@
 import React from 'react';
+import Waiting from './Waiting.jsx';
+import ThumbInput from './ThumbInput.jsx';
 
 class Student extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'waiting',
+      isWaiting: true,
       waitingFor: 'lecture'
     };
   }
 
   render () {
     return (
-      <div>
-        <h1>Student Component</h1>
-        {this.state.status === 'waiting'
-        ? <Waiting waitingFor={this.status.waitingFor} />
+      <div className="col-xs-10">
+        {this.state.isWaiting === true
+        ? <Waiting waitingFor={this.state.waitingFor} />
         : <ThumbInput />}
       </div>
     )
