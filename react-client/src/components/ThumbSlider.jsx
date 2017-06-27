@@ -1,7 +1,6 @@
 import React from 'react';
-import InputRange from 'react-input-range';
-
-const style = { width: 600, margin: 50 };
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class ThumbSlider extends React.Component {
   constructor(props) {
@@ -13,11 +12,11 @@ class ThumbSlider extends React.Component {
 
   render () {
     return (
-      <InputRange
-        maxValue={20}
-        minValue={0}
-        value={this.state.value}
-        onChange={value => this.setState({ value })} />
+      <div>
+        <div style={{height: 200}}>
+          <Slider vertical min={0} marks={{0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%'}} step={null} onChange={this.log} defaultValue={0} />
+        </div>
+      </div>
     )
   }
 }
