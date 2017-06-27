@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   onSignIn(googleUser) {
-    console.log(googleUser); 
+    console.log(googleUser);
     let tokenId = googleUser.tokenId;
     axios({
       method: 'get',
@@ -36,7 +36,7 @@ class App extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-default">
-          <span className="navbar-brand">Thumbs Check</span>
+          <span className="navbar-brand">ThumbsCheck</span>
         </nav>
         <div className="row">
           <div className="col-xs-10">
