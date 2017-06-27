@@ -6,7 +6,7 @@ class Student extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isWaiting: true,
+      isWaiting: false,
       waitingFor: 'lecture'
     };
   }
