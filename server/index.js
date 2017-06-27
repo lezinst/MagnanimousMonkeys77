@@ -1,31 +1,31 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-// var items = require('../database-mongo');
+var axios = require('axios');
+var GoogleAuth = require('google-auth-library');
+
+var auth = new GoogleAuth;
+var client = new auth.OAuth2('430160456638-mmtpqlu3h8t0nkum0tlo167d492gvbmf.apps.googleusercontent.com', '', '');
+
+var items = require('../database-mysql');
 
 var app = express();
 
-
 const port = process.env.PORT || 3000;
 
-
-// UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
-
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
+app.get('/login', (req, res) => {
+  client.verifyIdToken(
+    req.query.tokenId,
+    '430160456638-mmtpqlu3h8t0nkum0tlo167d492gvbmf.apps.googleusercontent.com',
+    function(e, login) {
+      console.log(login);
+      var payload = login.getPayload();
+      var userid = payload['email'];
+      console.log(userid);
     }
-  });
-});
+  );
+})
 
 app.listen(port, function() {
   console.log(`listening on port ${port}!`);
