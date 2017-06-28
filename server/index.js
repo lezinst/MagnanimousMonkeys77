@@ -3,12 +3,14 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 var db = require('../database-mysql');
 var google = require('./middleware/googleAuth.js');
-
-var items = require('../database-mysql');
-
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 const port = process.env.PORT || 3000;
+
+server.listen(port);
+
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -22,7 +24,16 @@ app.get('/login', (req, res) => {
   })
 })
 
-app.listen(port, function() {
-  console.log(`listening on port ${port}!`);
+
+io.on('connection', function (socket) {
+  console.log(`socket: ${socket}`);
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
 });
+
+// app.listen(port, function() {
+//   console.log(`listening on port ${port}!`);
+// });
 
