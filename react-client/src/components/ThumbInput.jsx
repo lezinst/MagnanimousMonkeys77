@@ -13,7 +13,7 @@ class ThumbInput extends React.Component {
 
   changeThumbRotation (value) {
     this.setState({
-      thumbRotation: value
+      thumbRotation: (45 * value) - 180
     })
   }
 
@@ -21,7 +21,7 @@ class ThumbInput extends React.Component {
     return (
       <div className="row">
         <div className="col-xs-5" style={{height: 200}}>
-          <Slider vertical min={-180} max={0} marks={{'-180':'Down', '-135':'–', '-90':'Middle', '-45':'–', 0:'Up'}} step={null} onChange={this.changeThumbRotation.bind(this)} defaultValue={-90} />
+          <Slider vertical min={0} max={4} marks={{0:'Down', 1:'–', 2:'Middle', 3:'–', 4:'Up'}} step={null} onChange={this.changeThumbRotation.bind(this)} defaultValue={2} />
         </div>
         <div className="col-xs-5">
           <ThumbVisualization thumbRotation={this.state.thumbRotation} />
