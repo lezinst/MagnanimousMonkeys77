@@ -1,6 +1,7 @@
 import React from 'react';
 import ThumbVisualization from './ThumbVisualization.jsx';
-import ThumbSlider from './ThumbSlider.jsx';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class ThumbInput extends React.Component {
   constructor(props) {

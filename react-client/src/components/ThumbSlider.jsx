@@ -6,7 +6,6 @@ class ThumbSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: { min: 2, max: 10 }
     };
   }
 
