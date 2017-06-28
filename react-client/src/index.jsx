@@ -6,6 +6,9 @@ import Student from './components/Student.jsx';
 import Instructor from './components/Instructor.jsx';
 import axios from 'axios';
 
+const io = require('socket.io-client')  
+const socket = io()  
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +16,10 @@ class App extends React.Component {
       view: '',
       tokenId: ''
     }
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
   }
 
   componentDidMount() {
