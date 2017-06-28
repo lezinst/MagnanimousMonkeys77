@@ -30,14 +30,14 @@ CREATE TABLE thumbs (
 CREATE TABLE questions (
   id INT NOT NULL AUTO_INCREMENT,
   lecture_id INT NOT NULL,
-  average_thumb_question DEC,
+  average_thumb_question DEC(4,2),
   PRIMARY KEY (ID)
 );
 
 CREATE TABLE lectures (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
-  average_thumb_lecture DEC,
+  average_thumb_lecture DEC(4,2),
   PRIMARY KEY (ID)
 );
 

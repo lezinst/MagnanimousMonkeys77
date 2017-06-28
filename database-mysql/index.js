@@ -53,7 +53,17 @@ const createNewQuestion = function(lectureId) {
   })
 }
 
-
+const addAvgThumbForQuestion = function(questionId, avgThumbValue) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`UPDATE questions SET average_thumb_question=${avgThumbValue} WHERE id=${questionId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
 
 
 module.exports.createNewQuestion = createNewQuestion;
