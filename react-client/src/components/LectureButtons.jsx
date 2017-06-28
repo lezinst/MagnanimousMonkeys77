@@ -10,10 +10,24 @@ class LectureButtons extends React.Component {
 		};
 	}
 
+  onCheckThumbsButtonClick () {
+    axios({
+	    method: 'post',
+	    url: '/lecture',
+	    params: {
+	      name: this.state.name
+	    }
+	  }).then((response) => {
+  		this.props.changeLectureStatus('lectureStarted');	
+	  }).catch((error) => {
+	  	console.log(error);
+	  })
+  }
+
 	render () {
 		return (
 			<div>
-		     <CheckThumbsButton />
+		     <CheckThumbsButton onCheckThumbsButtonClick={this.onCheckThumbsButtonClick.bind(this)} />
 		     <EndLectureButton />
 		  </div>
 		)

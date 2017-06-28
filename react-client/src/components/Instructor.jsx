@@ -8,7 +8,7 @@ class Instructor extends React.Component {
     super(props);
     this.state = {
       lectureStatus: 'lectureNotStarted',
-
+      checkThumbsActivated: false
     };
   }
 
@@ -18,6 +18,7 @@ class Instructor extends React.Component {
       lectureStatus: lectureStatus
     })
   }
+
  
   render () {
     return (
@@ -26,7 +27,7 @@ class Instructor extends React.Component {
         {this.state.lectureStatus === 'lectureNotStarted'
          ? <LectureMaker changeLectureStatus={this.changeLectureStatus.bind(this)}/>
          : this.state.lectureStatus === 'lectureStarted'
-         ? <LectureButtons />
+         ? <LectureButtons changeLectureStatus={this.changeLectureStatus.bind(this)} />
          : <ThumbsChecker />
         }
       </div>
