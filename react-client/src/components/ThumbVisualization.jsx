@@ -10,7 +10,7 @@ import React from 'react';
 	 	return (
 		  <div className="row">
 		    <div className="col-xs-12 text-center">
-          <i style={{transform: `rotate(${this.props.thumbRotation}deg)`}} className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+          <i style={{transform: `rotate(${this.props.thumbRotation}deg)`, fontSize: '212px'}} className="fa fa-thumbs-o-up" aria-hidden="true"></i>
 		    </div>
 		  </div>
 	  );
