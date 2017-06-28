@@ -28,12 +28,12 @@ app.post('/lecture', (req, res) => {
   let name = req.query.name;
   db.createNewLecture(name)
   .then(results => {
-    //console.log(results.insertId);
     res.send({ lectureId: results.insertId});
+    //set lectureID of current lecture varaible on server?
   })
 })
 
-
+//this just tests generic socket.io functionality
 io.on('connection', function (socket) {
   console.log(`socket: ${socket}`);
   socket.emit('news', { hello: 'world' });
