@@ -24,7 +24,29 @@ app.get('/login', (req, res) => {
   })
 })
 
+app.post('/lecture', (req, res) => {
+  let name = req.query.name;
+  db.createNewLecture(name)
+  .then(results => {
+    let lectureId = results.insertId;
+    res.send({ lectureId: lectureId });
+    //set lectureID of current lecture varaible on server?
+  })
+})
 
+app.post('/checkthumbs', (req, res) => {
+  let lecture = req.query.lecture_id;
+  db.createNewQuestion(lecture)
+  .then(results => {
+    let questionId = results.insertId;
+    //Emit the new question to students here
+
+    //send the response to the teacher
+    res.send({ questionId: questionId });
+  })
+})
+
+//this just tests generic socket.io functionality
 io.on('connection', function (socket) {
   console.log(`socket: ${socket}`);
   socket.emit('news', { hello: 'world' });
