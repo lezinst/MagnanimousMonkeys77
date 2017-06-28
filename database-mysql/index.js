@@ -28,4 +28,58 @@ const getUserType = function(gmail) {
     });
   })
 }
+
+const createNewLecture = function(name) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`INSERT INTO lectures (name) VALUES ("${name}")`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+const createNewQuestion = function(lectureId) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`INSERT INTO questions (lecture_id) VALUES ("${lectureId}")`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+const addAvgThumbForQuestion = function(questionId, avgThumbValue) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`UPDATE questions SET average_thumb_question=${avgThumbValue} WHERE id=${questionId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+const addAvgThumbForLecture = function(lectureId, avgThumbValue) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`UPDATE lectures SET average_thumb_lecture=${avgThumbValue} WHERE id=${lectureId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+
+module.exports.addAvgThumbForLecture = addAvgThumbForLecture;
+module.exports.addAvgThumbForQuestion = addAvgThumbForQuestion;
+module.exports.createNewQuestion = createNewQuestion;
+module.exports.createNewLecture = createNewLecture;
 module.exports.getUserType = getUserType;

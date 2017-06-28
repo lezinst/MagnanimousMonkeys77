@@ -4,6 +4,11 @@ CREATE DATABASE IF NOT EXISTS thumbscheck;
 
 USE thumbscheck;
 
+DROP TABLE users;
+DROP TABLE thumbs;
+DROP TABLE questions;
+DROP TABLE lectures;
+
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(30)  NOT NULL,
@@ -25,13 +30,14 @@ CREATE TABLE thumbs (
 CREATE TABLE questions (
   id INT NOT NULL AUTO_INCREMENT,
   lecture_id INT NOT NULL,
-  average_thumb_question DEC NOT NULL,
+  average_thumb_question DEC(4,2),
   PRIMARY KEY (ID)
 );
 
 CREATE TABLE lectures (
   id INT NOT NULL AUTO_INCREMENT,
-  average_thumb_lecture DEC NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  average_thumb_lecture DEC(4,2),
   PRIMARY KEY (ID)
 );
 
@@ -42,6 +48,7 @@ CREATE TABLE lectures (
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Rob", "St. Lezin", "robstlezin@gmail.com", "STUDENT");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Shyan", "Kashani", "shyan.kashani@gmail.com", "STUDENT");
 INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Mike", "Clausen", "michaeljclausen@gmail.com", "INSTRUCTOR");
+INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("Chris", "Aaker", "caaker.0@gmail.com", "STUDENT");
 
 
 /*  Execute this file from the command line by typing:
