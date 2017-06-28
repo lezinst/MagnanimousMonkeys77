@@ -28,6 +28,9 @@ class App extends React.Component {
       params: {
         tokenId: tokenId
       }
+    })
+    .then(result => {
+      console.log(result);
     });
     this.setState({ view: 'user'});
   }
