@@ -56,6 +56,6 @@ const createNewQuestion = function(lectureId) {
 
 
 
-
+module.exports.createNewQuestion = createNewQuestion;
 module.exports.createNewLecture = createNewLecture;
 module.exports.getUserType = getUserType;

@@ -28,8 +28,21 @@ app.post('/lecture', (req, res) => {
   let name = req.query.name;
   db.createNewLecture(name)
   .then(results => {
-    res.send({ lectureId: results.insertId});
+    let lectureId = results.insertId;
+    res.send({ lectureId: lectureId });
     //set lectureID of current lecture varaible on server?
+  })
+})
+
+app.post('/checkthumbs', (req, res) => {
+  let lecture = req.query.lecture_id;
+  db.createNewQuestion(lecture)
+  .then(results => {
+    let questionId = results.insertId;
+    //Emit the new question to students here
+
+    //send the response to the teacher
+    res.send({ questionId: questionId });
   })
 })
 
