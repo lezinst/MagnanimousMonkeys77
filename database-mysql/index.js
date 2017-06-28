@@ -1,6 +1,14 @@
 var mysql = require('mysql');
 
-var connection = mysql.createConnection({
+// var connection = mysql.createConnection({
+//   host     : process.env.DB_HOST || 'localhost',
+//   user     : process.env.DB_USERNAME || 'root',
+//   password : process.env.DB_PASSWORD || 'plantlife',
+//   database : process.env.DB_NAME || 'thumbscheck'
+// });
+
+var pool  = mysql.createPool({
+  connectionLimit : 10,
   host     : process.env.DB_HOST || 'localhost',
   user     : process.env.DB_USERNAME || 'root',
   password : process.env.DB_PASSWORD || 'plantlife',
@@ -11,7 +19,7 @@ console.log(`db connection: DB_HOST ${process.env.DB_HOST}, DB_USERNAME ${proces
 
 const getUserType = function(gmail) {
   return new Promise ((resolve, reject) => {
-    connection.query(`SELECT user_type FROM users WHERE gmail = "${gmail}"`, (err, results) => {
+    pool.query(`SELECT user_type FROM users WHERE gmail = "${gmail}"`, (err, results) => {
       if (err) {
         console.log(err);
       } else {
