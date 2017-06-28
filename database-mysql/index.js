@@ -28,4 +28,18 @@ const getUserType = function(gmail) {
     });
   })
 }
+
+const createNewLecture = function(name) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`INSERT INTO lectures (name) VALUES ("${name}")`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+module.exports.createNewLecture = createNewLecture;
 module.exports.getUserType = getUserType;

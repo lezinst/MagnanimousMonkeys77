@@ -24,6 +24,15 @@ app.get('/login', (req, res) => {
   })
 })
 
+app.post('/lecture', (req, res) => {
+  let name = req.query.name;
+  db.createNewLecture(name)
+  .then(results => {
+    //console.log(results.insertId);
+    res.send({ lectureId: results.insertId});
+  })
+})
+
 
 io.on('connection', function (socket) {
   console.log(`socket: ${socket}`);
