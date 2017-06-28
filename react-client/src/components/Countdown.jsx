@@ -1,5 +1,5 @@
 import React from 'react';
- 
+
  class Countdown extends React.Component {
 	  constructor(props) {
 	    super(props);
@@ -12,10 +12,10 @@ import React from 'react';
 	 	return (
 	  <div className="row">
 	    <div className="col-xs-12 text-center"><span className="well well-lg">{this.state.seconds}</span></div>
-	  </div> 	
+	  </div>
 	  );
-	 }	
- 
+	 }
+
  }
- 
- export default Countdown; 
+
+ export default Countdown;
