@@ -17,7 +17,9 @@ class App extends React.Component {
       tokenId: '',
       lectureStatus: 'lectureNotStarted',
       lectureId: '',
-      questionId:''
+      questionId:'',
+      thumbValue: 2,
+      countdown: 20
     }
   }
 
@@ -79,6 +81,11 @@ class App extends React.Component {
     })
   }
 
+  changeThumbValue (value) {
+    this.setState({
+      thumbValue: value
+    })
+  }
 
 
   render () {
@@ -92,8 +99,8 @@ class App extends React.Component {
             {this.state.view === 'login'
               ? <Login onSignIn={this.onSignIn.bind(this)}/>
               : this.state.view === 'student'
-              ? <Student startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} />
-              : <Instructor lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)}/> }
+              ? <Student thumbValue={this.state.thumbValue} changeThumbValue={this.changeThumbValue.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} />
+            : <Instructor thumbValue={this.state.thumbValue} lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)}/> }
           </div>
         </div>
       </div>
