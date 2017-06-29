@@ -19,7 +19,7 @@ class App extends React.Component {
       lectureId: '',
       questionId:'',
       thumbValue: 2,
-      countdown: 5
+      countdown: 10
     }
   }
 
@@ -67,6 +67,7 @@ class App extends React.Component {
       ? clearInterval(this.setInterval)
       : this.setState({ countdown: this.state.countdown - 1 }, () => {
         console.log('this.state.countdown', this.state.countdown);
+        socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
       });
     }, 1000)
   }

@@ -41,7 +41,7 @@ app.post('/checkthumbs', (req, res) => {
   .then(results => {
     let questionId = results.insertId;
     //Emit the new question to students here
-
+    io.emit('checkingThumbs', { questionId: questionId });
     //send the response to the teacher
     res.send({ questionId: questionId });
   })
@@ -50,13 +50,14 @@ app.post('/checkthumbs', (req, res) => {
 //this just tests generic socket.io functionality
 io.on('connection', function (socket) {
   console.log(`socket: ${socket}`);
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
+
   socket.on('username', function(data) {
     console.log('username', data);
     socket.username = data.username;
+  });
+
+  socket.on('thumbValue', data => {
+    console.log(`thumb value for ${socket.username} is ${data.thumbValue}`);
   })
 });
 
