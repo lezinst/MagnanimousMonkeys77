@@ -6,6 +6,9 @@ import Student from './components/Student.jsx';
 import Instructor from './components/Instructor.jsx';
 import axios from 'axios';
 
+const io = require('socket.io-client')  
+const socket = io()  
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,10 @@ class App extends React.Component {
       lectureId: '',
       questionId:''
     }
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
   }
 
   componentDidMount() {
@@ -31,8 +38,15 @@ class App extends React.Component {
       params: {
         tokenId: tokenId
       }
+    })
+    .then(result => {
+      if (result.data[0].user_type === 'STUDENT') {
+        this.setState({ view: 'student'});
+      } else if (result.data[0].user_type === 'INSTRUCTOR') {
+        this.setState({ view: 'instructor'});
+      }
     });
-    this.setState({ view: 'user'});
+
   }
 
   startLecture (lectureId) {
