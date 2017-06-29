@@ -14,7 +14,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       view: '',
-      tokenId: ''
+      tokenId: '',
+      lectureStatus: 'lectureNotStarted',
+      lectureId: '',
+      questionId:''
     }
     socket.on('news', function (data) {
       console.log(data);
@@ -46,6 +49,42 @@ class App extends React.Component {
 
   }
 
+  startLecture (lectureId) {
+    this.setState({
+      lectureStatus: 'lectureStarted',
+      lectureId: lectureId,
+    })
+  }
+
+  endLecture () {
+    this.setState({
+      lectureStatus: 'lectureNotStarted',
+      lectureId: ''
+    })
+  }
+
+  startThumbsCheck (questionId) {
+    this.setState({
+      lectureStatus: 'checkingThumbs',
+      questionId: questionId
+    })
+  }
+
+  endThumbsCheck () {
+    this.setState({
+      lectureStatus: 'lectureStarted',
+      questionId: ''
+    })
+  }
+
+  clearThumbsCheck () {
+    this.setState({
+      lectureStatus: 'lectureStarted'
+    })
+  }
+
+
+
   render () {
     return (
       <div>
@@ -58,7 +97,7 @@ class App extends React.Component {
               ? <Login onSignIn={this.onSignIn.bind(this)}/>
               : this.state.view === 'student'
               ? <Student />
-              : <Instructor /> }
+              : <Instructor lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)}/> }
           </div>
         </div>
       </div>
