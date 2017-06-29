@@ -23,11 +23,14 @@ class LectureMaker extends React.Component {
 	      name: this.state.name
 	    }
 	  }).then((response) => {
-  		this.props.changeLectureStatus('lectureStarted');	
+  		this.props.startLecture(response.data.lectureId);
+
 	  }).catch((error) => {
 	  	console.log(error);
 	  })
   }
+
+
 
 	render () {
   	return (

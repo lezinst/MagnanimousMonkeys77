@@ -1,24 +1,23 @@
 import React from 'react';
-import CheckThumbsButton from './CheckThumbsButton.jsx';
-import EndLectureButton from './EndLectureButton.jsx'
+import axios from 'axios';
 
 class LectureButtons extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-
+    
 		};
 	}
 
-  onCheckThumbsButtonClick () {
+  onThumbsCheck () {
     axios({
 	    method: 'post',
-	    url: '/lecture',
+	    url: '/checkthumbs',
 	    params: {
-	      name: this.state.name
+	      lecture_id: this.props.lectureId
 	    }
 	  }).then((response) => {
-  		this.props.changeLectureStatus('lectureStarted');	
+  		this.props.startThumbsCheck(response.data.questionId);	
 	  }).catch((error) => {
 	  	console.log(error);
 	  })
@@ -27,8 +26,12 @@ class LectureButtons extends React.Component {
 	render () {
 		return (
 			<div>
-		     <CheckThumbsButton onCheckThumbsButtonClick={this.onCheckThumbsButtonClick.bind(this)} />
-		     <EndLectureButton />
+				 <div className="row">
+				   <div className="col-xs-12 text-center"><a onClick={this.onThumbsCheck.bind(this)}className="btn btn-danger btn-lg">Check Thumbs</a></div>
+				 </div>
+				 <div className="row">
+				   <div className="col-xs-12 text-center"><a onClick={this.props.endLecture} className="btn btn-danger btn-lg">End Lecture</a></div>
+				 </div>			
 		  </div>
 		)
 	}
