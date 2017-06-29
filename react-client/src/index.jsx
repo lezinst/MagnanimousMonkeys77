@@ -6,8 +6,8 @@ import Student from './components/Student.jsx';
 import Instructor from './components/Instructor.jsx';
 import axios from 'axios';
 
-const io = require('socket.io-client')  
-const socket = io()  
+const io = require('socket.io-client');
+const socket = io();
 
 class App extends React.Component {
   constructor(props) {
@@ -19,10 +19,6 @@ class App extends React.Component {
       lectureId: '',
       questionId:''
     }
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
-    });
   }
 
   componentDidMount() {
@@ -30,7 +26,6 @@ class App extends React.Component {
   }
 
   onSignIn(googleUser) {
-    console.log(googleUser);
     let tokenId = googleUser.tokenId;
     axios({
       method: 'get',
@@ -45,6 +40,7 @@ class App extends React.Component {
       } else if (result.data[0].user_type === 'INSTRUCTOR') {
         this.setState({ view: 'instructor'});
       }
+      socket.emit('username', { username: googleUser.profileObj.email })
     });
 
   }
@@ -96,7 +92,7 @@ class App extends React.Component {
             {this.state.view === 'login'
               ? <Login onSignIn={this.onSignIn.bind(this)}/>
               : this.state.view === 'student'
-              ? <Student />
+              ? <Student startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} />
               : <Instructor lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)}/> }
           </div>
         </div>
