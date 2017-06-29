@@ -31,6 +31,7 @@ app.post('/lecture', (req, res) => {
     let lectureId = results.insertId;
     res.send({ lectureId: lectureId });
     //set lectureID of current lecture varaible on server?
+    io.emit('lectureStarted', { lectureId: lectureId })
   })
 })
 
@@ -53,9 +54,12 @@ io.on('connection', function (socket) {
   socket.on('my other event', function (data) {
     console.log(data);
   });
+  socket.on('username', function(data) {
+    console.log('username', data);
+    socket.username = data.username;
+  })
 });
 
 // app.listen(port, function() {
 //   console.log(`listening on port ${port}!`);
 // });
-
