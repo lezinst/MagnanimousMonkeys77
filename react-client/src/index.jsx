@@ -97,7 +97,7 @@ class App extends React.Component {
               ? <Login onSignIn={this.onSignIn.bind(this)}/>
               : this.state.view === 'student'
               ? <Student />
-              : <Instructor lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)}/> }
+              : <Instructor lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)}/> }
           </div>
         </div>
       </div>

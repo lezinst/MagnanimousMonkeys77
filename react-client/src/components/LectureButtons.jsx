@@ -10,6 +10,8 @@ class LectureButtons extends React.Component {
 	}
 
   onThumbsCheck () {
+  	console.log('onThumbsCheck is being called');
+  	console.log('this.props.lectureId', this.props.lectureId);
     axios({
 	    method: 'post',
 	    url: '/checkthumbs',

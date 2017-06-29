@@ -18,7 +18,7 @@ class Instructor extends React.Component {
         {this.props.lectureStatus === 'lectureNotStarted'
          ? <LectureMaker startLecture={this.props.startLecture}/>
          : this.props.lectureStatus === 'lectureStarted'
-         ? <LectureButtons startThumbsCheck={this.props.startThumbsCheck} endLecture={this.props.endLecture} />
+         ? <LectureButtons lectureId={this.props.lectureId} startThumbsCheck={this.props.startThumbsCheck} endLecture={this.props.endLecture} />
          : <ThumbsChecker clearThumbsCheck={this.props.clearThumbsCheck}/>
         }
       </div>
