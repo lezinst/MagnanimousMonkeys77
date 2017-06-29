@@ -19,7 +19,7 @@ class App extends React.Component {
       lectureId: '',
       questionId:'',
       thumbValue: 2,
-      countdown: 20
+      countdown: 5
     }
   }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
     })
     .then(result => {
       if (result.data[0].user_type === 'STUDENT') {
-        this.setState({ view: 'student'});
+        this.setState({ view: 'instructor'});
       } else if (result.data[0].user_type === 'INSTRUCTOR') {
         this.setState({ view: 'instructor'});
       }
@@ -61,11 +61,21 @@ class App extends React.Component {
     })
   }
 
+  setInterval () {
+    setInterval (() => {
+      this.state.countdown === 0
+      ? clearInterval(this.setInterval)
+      : this.setState({ countdown: this.state.countdown - 1 }, () => {
+        console.log('this.state.countdown', this.state.countdown);
+      });
+    }, 1000)
+  }
+
   startThumbsCheck (questionId) {
     this.setState({
       lectureStatus: 'checkingThumbs',
       questionId: questionId
-    })
+    }, this.setInterval)
   }
 
   endThumbsCheck () {
