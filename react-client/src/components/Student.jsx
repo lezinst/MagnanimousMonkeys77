@@ -13,6 +13,10 @@ class Student extends React.Component {
     socket.on('lectureStarted', (data) => {
       props.startLecture(data.lectureId);
     })
+
+    socket.on('checkingThumbs', (data) => {
+      props.startThumbsCheck(data.questionId);
+    })
   }
 
   render () {
@@ -22,7 +26,7 @@ class Student extends React.Component {
         ? <Waiting waitingFor={'lecture'} />
         : this.props.lectureStatus === 'lectureStarted'
         ? <Waiting waitingFor={'question'} />
-        : <ThumbInput />}
+      : <ThumbInput thumbValue={this.props.thumbValue} changeThumbValue={this.props.changeThumbValue} />}
       </div>
     )
   }

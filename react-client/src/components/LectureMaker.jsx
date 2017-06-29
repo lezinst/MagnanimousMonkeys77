@@ -24,7 +24,6 @@ class LectureMaker extends React.Component {
 	    }
 	  }).then((response) => {
   		this.props.startLecture(response.data.lectureId);
-
 	  }).catch((error) => {
 	  	console.log(error);
 	  })
