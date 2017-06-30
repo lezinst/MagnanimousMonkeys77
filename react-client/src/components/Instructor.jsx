@@ -12,7 +12,7 @@ class Instructor extends React.Component {
     this.state = {};
 
     socket.on('averageThumbValue', (data) => {
-      this.props.changeThumbValue(data.averageThumbValue);
+      props.changeThumbValue(data.averageThumbValue);
     })
   }
 
