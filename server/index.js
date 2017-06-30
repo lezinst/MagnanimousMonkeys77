@@ -15,7 +15,7 @@ server.listen(port);
 var lectureId = '';
 var questionId = '';
 var thumbs = '';
-var instructorId = '';  // this will be the socket.id 
+var instructorId = '';  // this will be the socket.id
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -76,7 +76,7 @@ io.on('connection', function (socket) {
     }
     thumbs.setThumbValueForStudent(socket.username, data.thumbValue);
     let average = thumbs.getAverageThumbValue();
-    io.sockets.connected[instructorId].emit('averageThumbValue', { averageThumbValue: average });
+    io.emit('averageThumbValue', { averageThumbValue: average });
     console.log(`sending averageThumbValue of ${average}`);
     console.log(`thumb value for ${socket.username} is ${data.thumbValue}`);
   })
@@ -126,9 +126,3 @@ class Student {
     this.thumbValue = null;
   }
 }
-
-
-
-
-
-
