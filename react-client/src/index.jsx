@@ -43,6 +43,9 @@ class App extends React.Component {
         this.setState({ view: 'instructor'});
       }
       socket.emit('username', { username: googleUser.profileObj.email })
+      if(result.data[0].user_type === 'INSTRUCTOR'){
+        socket.emit('instructor', { username: googleUser.profileObj.email })
+      }
     });
 
   }
