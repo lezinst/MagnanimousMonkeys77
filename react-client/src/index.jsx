@@ -38,7 +38,7 @@ class App extends React.Component {
     })
     .then(result => {
       if (result.data[0].user_type === 'STUDENT') {
-        this.setState({ view: 'student'});
+        this.setState({ view: 'instructor'});
       } else if (result.data[0].user_type === 'INSTRUCTOR') {
         this.setState({ view: 'instructor'});
       }
@@ -74,10 +74,10 @@ class App extends React.Component {
     })
   }
 
-  setInterval () {
-    setInterval (() => {
+  setCountdownInterval () {
+    var countdownInterval = setInterval (() => {
       this.state.countdown === 0
-      ? clearInterval(this.setInterval)
+      ? clearInterval(countdownInterval)
       : this.setState({ countdown: this.state.countdown - 1 }, () => {
         console.log('this.state.countdown', this.state.countdown);
         if (this.state.view === 'student') {
@@ -87,11 +87,15 @@ class App extends React.Component {
     }, 1000)
   }
 
+  clearCountdownInterval () {
+    clearInterval(this.setCountdownInterval)
+  }
+
   startThumbsCheck (questionId) {
     this.setState({
       lectureStatus: 'checkingThumbs',
       questionId: questionId
-    }, this.setInterval)
+    }, this.setCountdownInterval)
   }
 
   endThumbsCheck () {
@@ -102,10 +106,10 @@ class App extends React.Component {
   }
 
   clearThumbsCheck () {
-    clearInterval(this.setInterval);
     this.setState({
       lectureStatus: 'lectureStarted',
-      questionId: ''
+      questionId: '',
+      countdown: 10
     })
   }
 
