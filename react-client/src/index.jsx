@@ -38,7 +38,7 @@ class App extends React.Component {
     })
     .then(result => {
       if (result.data[0].user_type === 'STUDENT') {
-        this.setState({ view: 'instructor'});
+        this.setState({ view: 'student'});
       } else if (result.data[0].user_type === 'INSTRUCTOR') {
         this.setState({ view: 'instructor'});
       }
