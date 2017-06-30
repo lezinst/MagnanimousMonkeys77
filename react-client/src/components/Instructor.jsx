@@ -3,13 +3,17 @@ import LectureMaker from './LectureMaker.jsx';
 import LectureButtons from './LectureButtons.jsx';
 import ThumbsChecker from './ThumbsChecker.jsx';
 
+const io = require('socket.io-client');
+const socket = io();
+
 class Instructor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
 
-
+    socket.on('averageThumbValue', (data) => {
+      this.props.changeThumbValue(data.averageThumbValue);
+    })
   }
 
   render () {
