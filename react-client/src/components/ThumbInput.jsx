@@ -23,7 +23,7 @@ class ThumbInput extends React.Component {
           </div>
         </div>
         <div className="row">
-          <Countdown />
+          <Countdown countdown={this.props.countdown} />
         </div>
     </div>
     )
