@@ -43,6 +43,9 @@ class App extends React.Component {
         this.setState({ view: 'instructor'});
       }
       socket.emit('username', { username: googleUser.profileObj.email })
+      if(result.data[0].user_type === 'INSTRUCTOR'){
+        socket.emit('instructor', { username: googleUser.profileObj.email })
+      }
     });
 
   }
@@ -110,8 +113,8 @@ class App extends React.Component {
             {this.state.view === 'login'
               ? <Login onSignIn={this.onSignIn.bind(this)}/>
               : this.state.view === 'student'
-              ? <Student thumbValue={this.state.thumbValue} changeThumbValue={this.changeThumbValue.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} />
-            : <Instructor thumbValue={this.state.thumbValue} lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)}/> }
+              ? <Student thumbValue={this.state.thumbValue} changeThumbValue={this.changeThumbValue.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} countdown={this.state.countdown} />
+            : <Instructor thumbValue={this.state.thumbValue} lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} endThumbsCheck={this.endThumbsCheck.bind(this)} countdown={this.state.countdown}/> }
           </div>
         </div>
       </div>
