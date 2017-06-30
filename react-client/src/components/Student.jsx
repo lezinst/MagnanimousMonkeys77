@@ -26,7 +26,7 @@ class Student extends React.Component {
         ? <Waiting waitingFor={'lecture'} />
         : this.props.lectureStatus === 'lectureStarted'
         ? <Waiting waitingFor={'question'} />
-      : <ThumbInput thumbValue={this.props.thumbValue} changeThumbValue={this.props.changeThumbValue} />}
+      : <ThumbInput countdown={this.props.countdown} thumbValue={this.props.thumbValue} changeThumbValue={this.props.changeThumbValue} />}
       </div>
     )
   }
