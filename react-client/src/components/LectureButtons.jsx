@@ -5,7 +5,7 @@ class LectureButtons extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-    
+
 		};
 	}
 
@@ -19,7 +19,7 @@ class LectureButtons extends React.Component {
 	      lecture_id: this.props.lectureId
 	    }
 	  }).then((response) => {
-  		this.props.startThumbsCheck(response.data.questionId);	
+  		this.props.startThumbsCheck(response.data.questionId);
 	  }).catch((error) => {
 	  	console.log(error);
 	  })
