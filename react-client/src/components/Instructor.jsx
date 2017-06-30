@@ -7,8 +7,9 @@ class Instructor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
+
+
   }
 
   render () {
@@ -19,7 +20,7 @@ class Instructor extends React.Component {
          ? <LectureMaker startLecture={this.props.startLecture}/>
          : this.props.lectureStatus === 'lectureStarted'
          ? <LectureButtons lectureId={this.props.lectureId} startThumbsCheck={this.props.startThumbsCheck} endLecture={this.props.endLecture} />
-         : <ThumbsChecker clearThumbsCheck={this.props.clearThumbsCheck}/>
+       : <ThumbsChecker thumbValue={this.props.thumbValue} clearThumbsCheck={this.props.clearThumbsCheck}/>
         }
       </div>
     )
