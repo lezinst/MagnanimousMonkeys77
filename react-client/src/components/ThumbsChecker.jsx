@@ -1,5 +1,6 @@
 import React from 'react'
-import ThumbVisualization from './ThumbVisualization.jsx'
+import ThumbVisualization from './ThumbVisualization.jsx';
+import Countdown from './Countdown.jsx';
 
 class ThumbsChecker extends React.Component {
 	constructor(props) {
@@ -11,6 +12,7 @@ class ThumbsChecker extends React.Component {
 		return (
 			<div>
 				<ThumbVisualization thumbValue={this.props.thumbValue} />
+				<Countdown countdown={this.props.countdown} />
 			</div>
 	  )
    }
