@@ -58,31 +58,44 @@ class App extends React.Component {
   }
 
   endLecture () {
-    this.setState({
-      lectureStatus: 'lectureNotStarted',
-      lectureId: ''
+    let lectureId = this.state.lectureId;
+    console.log(lectureId);
+    axios({
+      method: 'post',
+      url: '/endLecture',
+      params: {
+        lectureId: lectureId
+      }
+    }).then((result) => {
+      this.setState({
+        lectureStatus: 'lectureNotStarted',
+        lectureId: ''
+      })
     })
   }
 
-  setInterval () {
-    setInterval (() => {
+  setCountdownInterval () {
+    var countdownInterval = setInterval (() => {
       this.state.countdown === 0
-      ? clearInterval(this.setInterval)
+      ? clearInterval(countdownInterval)
       : this.setState({ countdown: this.state.countdown - 1 }, () => {
         console.log('this.state.countdown', this.state.countdown);
         if (this.state.view === 'student') {
           socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
         }
-
       });
     }, 1000)
+  }
+
+  clearCountdownInterval () {
+    clearInterval(this.setCountdownInterval)
   }
 
   startThumbsCheck (questionId) {
     this.setState({
       lectureStatus: 'checkingThumbs',
       questionId: questionId
-    }, this.setInterval)
+    }, this.setCountdownInterval)
   }
 
   endThumbsCheck () {
@@ -94,7 +107,9 @@ class App extends React.Component {
 
   clearThumbsCheck () {
     this.setState({
-      lectureStatus: 'lectureStarted'
+      lectureStatus: 'lectureStarted',
+      questionId: '',
+      countdown: 10
     })
   }
 
