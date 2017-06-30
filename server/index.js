@@ -6,11 +6,16 @@ var google = require('./middleware/googleAuth.js');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var data = require('./middleware/thumbsData.js');
 
 const port = process.env.PORT || 3000;
 
 server.listen(port);
 
+var lectureId = '';
+var questionId = '';
+var thumbs = '';
+var instructorId = '';  // this will be the socket.id 
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -28,9 +33,8 @@ app.post('/lecture', (req, res) => {
   let name = req.query.name;
   db.createNewLecture(name)
   .then(results => {
-    let lectureId = results.insertId;
+    lectureId = results.insertId;
     res.send({ lectureId: lectureId });
-    //set lectureID of current lecture varaible on server?
     io.emit('lectureStarted', { lectureId: lectureId })
   })
 })
@@ -39,27 +43,46 @@ app.post('/checkthumbs', (req, res) => {
   let lecture = req.query.lecture_id;
   db.createNewQuestion(lecture)
   .then(results => {
-    let questionId = results.insertId;
+    questionId = results.insertId;
+    thumbs = new data.ThumbsData(lectureId, questionId);
     //Emit the new question to students here
-
+    io.emit('checkingThumbs', { questionId: questionId });
     //send the response to the teacher
     res.send({ questionId: questionId });
   })
 })
 
-//this just tests generic socket.io functionality
 io.on('connection', function (socket) {
   console.log(`socket: ${socket}`);
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
+
+  //put the gmail username on each socket that is connected
   socket.on('username', function(data) {
     console.log('username', data);
     socket.username = data.username;
+  });
+
+  socket.on('instructor', data => {
+    instructorId = socket.id;
+    socket.instructor = data.username;
+    console.log(`the instructor is: ${socket.instructor}`);
+
+  })
+
+  //recieve the thumb value from the student
+  socket.on('thumbValue', data => {
+    if (!thumbs.hasStudent(socket.username)) {
+      let student = new data.Student(socket.username, socket.id);
+      thumbs.addStudent(student);
+    }
+    thumbs.setValueForStudent(socket.username, data.thumbValue);
+    io.sockets.connected[instructorId].emit('averageThumbValue', { value: thumbs.getAverageThumbValue() });
+    console.log(`thumb value for ${socket.username} is ${data.thumbValue}`);
   })
 });
 
-// app.listen(port, function() {
-//   console.log(`listening on port ${port}!`);
-// });
+
+
+
+
+
+
