@@ -116,8 +116,8 @@ class App extends React.Component {
             {this.state.view === 'login'
               ? <Login onSignIn={this.onSignIn.bind(this)}/>
               : this.state.view === 'student'
-              ? <Student thumbValue={this.state.thumbValue} changeThumbValue={this.changeThumbValue.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} countdown={this.state.countdown} />
-            : <Instructor thumbValue={this.state.thumbValue} lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} countdown={this.state.countdown} changeThumbValue={this.changeThumbValue.bind(this)}/> }
+              ? <Student thumbValue={this.state.thumbValue} changeThumbValue={this.changeThumbValue.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} countdown={this.state.countdown} view={this.state.view} />
+            : <Instructor thumbValue={this.state.thumbValue} lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} countdown={this.state.countdown} changeThumbValue={this.changeThumbValue.bind(this)} view={this.state.view} /> }
           </div>
         </div>
       </div>
