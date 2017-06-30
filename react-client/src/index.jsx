@@ -58,9 +58,19 @@ class App extends React.Component {
   }
 
   endLecture () {
-    this.setState({
-      lectureStatus: 'lectureNotStarted',
-      lectureId: ''
+    let lectureId = this.state.lectureId;
+    console.log(lectureId);
+    axios({
+      method: 'post',
+      url: '/endLecture',
+      params: {
+        lectureId: lectureId
+      }
+    }).then((result) => {
+      this.setState({
+        lectureStatus: 'lectureNotStarted',
+        lectureId: ''
+      })
     })
   }
 
@@ -73,7 +83,6 @@ class App extends React.Component {
         if (this.state.view === 'student') {
           socket.emit('thumbValue', { thumbValue: this.state.thumbValue });
         }
-
       });
     }, 1000)
   }
@@ -93,8 +102,10 @@ class App extends React.Component {
   }
 
   clearThumbsCheck () {
+    clearInterval(this.setInterval);
     this.setState({
-      lectureStatus: 'lectureStarted'
+      lectureStatus: 'lectureStarted',
+      questionId: ''
     })
   }
 
