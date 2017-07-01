@@ -1,123 +1,44 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing:  0;
+.main * {
+  font-size: 18px !important;
 }
 
-/*************************/
-
-html, body {
-  height: 100%;
-  background-color: #fafafa;
+.navbar {
+  background-color: orange !important;
 }
 
-html * {
-  font-family: 'Varela Round', sans-serif;
-  font-size: 48px;
-  color: #464646;
+.navbar * {
+  color: white !important;
 }
 
-#app {
-  height: 100%;
-  overflow: hidden;
+.form-control {
+  margin-top: 36vh !important;
+  padding-top: 18px !important; padding-bottom: 18px !important;
 }
 
-.nav {
-  background-color: #e2e2e2;
-  padding: 36px;
+.btn {
+  border-radius: 96px !important;
+  padding-top: 6px !important; padding-bottom: 6px !important;
+  width: 64vw !important;
+  margin-top: 36vh !important;
 }
 
-.nav-brand {
-  margin: 0 0 0 12px;
+.btn-success {
+  background-color: limegreen !important;
 }
 
-.wrapper {
-  padding: 36px;
-  vertical-align: middle;
+.btn-danger {
+  background-color: red !important;
 }
 
-.view {
-  text-align: center;
+.thumb-visualization * {
+  font-size: 212px !important;
 }
 
-.button {
-  display: inline-block;
-  vertical-align: middle;
-  background-color: #f2f2f2;
-  border: 4px solid #ffffff;
-  padding: 24px;
-  border-radius: 100px;
-  width: 72%;
-  margin: 36vh 0 0 0;
-  color: white;
+.countdown {
+  font-size: 96px !important;
 }
 
-.button:active, input:active  {
-  opacity: 0.6;
-  outline: none;
-}
-
-.button:target, .button:enabled, input:target, input:enabled {
-  outline: none;
-}
-
-input {
-  border: 4px solid #d2d2d2;
-  margin: 36vh 0 0 0;
-  padding: 20px 24px;
-  border-radius: 12px;
-  width: 72%;
-}
-
-.state {
-  height: 80vh;
-}
-
-.green {
-  background-color: limegreen;
-}
-
-.red {
-  background-color: red;
-}
-
-.thumb-visualization {
-  margin: 36vh 0 0 0;
+p {
+  margin-top: 36vh !important;
+  padding-top: 6px !important; padding-bottom: 6px !important;
 }

@@ -4,9 +4,7 @@ import axios from 'axios';
 class LectureButtons extends React.Component {
 	constructor (props) {
 		super(props);
-		this.state = {
-
-		};
+		this.state = {};
 	}
 
   onThumbsCheck () {
@@ -27,9 +25,21 @@ class LectureButtons extends React.Component {
 
 	render () {
 		return (
-			<div className="state">
-				<div onClick={this.onThumbsCheck.bind(this)} className="button green">Check Thumbs</div>
-				<div onClick={this.props.endLecture} className="button red">End Lecture</div>
+			<div className="row">
+				<div className="col-xs-12 text-center">
+					<div
+						className="btn btn-lg btn-success"
+						onClick={this.onThumbsCheck.bind(this)}>
+						Check Thumbs
+					</div>
+				</div>
+				<div className="col-xs-12 text-center">
+					<div
+						className="btn btn-lg btn-danger"
+						onClick={this.props.endLecture}>
+						End Lecture
+					</div>
+				</div>
 		  </div>
 		)
 	}
