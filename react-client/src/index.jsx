@@ -9,6 +9,8 @@ import axios from 'axios';
 const io = require('socket.io-client');
 const socket = io();
 
+var countdownInterval;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -82,9 +84,9 @@ class App extends React.Component {
   }
 
   setCountdownInterval () {
-    var countdownInterval = setInterval (() => {
+    countdownInterval = setInterval (() => {
       this.state.countdown === 0
-      ? clearInterval(countdownInterval)
+      ? this.clearCountdownInterval()
       : this.setState({ countdown: this.state.countdown - 1 }, () => {
         console.log('this.state.countdown', this.state.countdown);
         if (this.state.view === 'student') {
@@ -95,7 +97,14 @@ class App extends React.Component {
   }
 
   clearCountdownInterval () {
-    clearInterval(this.setCountdownInterval)
+    clearInterval(countdownInterval);
+    if (this.state.view === 'student') {
+      this.setState({
+        lectureStatus: 'lectureStarted',
+        questionId: '',
+        countdown: 10
+      })
+    }
   }
 
   startThumbsCheck (questionId) {
