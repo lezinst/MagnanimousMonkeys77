@@ -98,11 +98,13 @@ class App extends React.Component {
 
   clearCountdownInterval () {
     clearInterval(countdownInterval);
-    this.setState({
-      lectureStatus: 'lectureStarted',
-      questionId: '',
-      countdown: 10
-    })
+    if (this.state.view === 'student') {
+      this.setState({
+        lectureStatus: 'lectureStarted',
+        questionId: '',
+        countdown: 10
+      })
+    }
   }
 
   startThumbsCheck (questionId) {
