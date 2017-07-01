@@ -52,6 +52,14 @@ app.post('/checkthumbs', (req, res) => {
   })
 })
 
+app.post('/endLecture', (req, res) => {
+  let lecture = req.query.lectureId;
+  // calculate the average for all thumbs in lecture
+  // and store it in the database
+  io.emit('lectureEnded', { response: 'ok' });
+  res.status(200).send('end lecture');
+});
+
 io.on('connection', function (socket) {
   console.log(`socket: ${socket}`);
 
