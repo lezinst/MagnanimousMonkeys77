@@ -77,7 +77,7 @@ class App extends React.Component {
 
   endLectureStudent () {
     this.setState({
-      lectureStatus: 'lectureNotStarted';
+      lectureStatus: 'lectureNotStarted'
     })
   }
 
