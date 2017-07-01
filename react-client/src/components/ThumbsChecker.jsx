@@ -13,17 +13,11 @@ class ThumbsChecker extends React.Component {
 
 	render () {
 		return (
-			<div>
+			<div className="thumbs-checker">
 				<ThumbVisualization thumbValue={this.props.thumbValue} />
-				{this.props.countdown !== 0 ? 
-				<Countdown countdown={this.props.countdown} /> :
-				<div className="row">
-  				  <div className="col-xs-12 text-center">
-  				    <a onClick={this.props.clearThumbsCheck} className="btn btn-primary btn-lg">Clear Thumbs</a>
-  				  </div>
- 				</div>
-				}
-				
+				{ this.props.countdown !== 0
+				? <Countdown countdown={this.props.countdown} />
+				: <div onClick={this.props.clearThumbsCheck} className="button red">Clear Thumbs</div> }
 			</div>
 	  )
    }

@@ -33,13 +33,9 @@ class LectureMaker extends React.Component {
 
 	render () {
   	return (
-      <div className="row">
-      	<div className="col-xs-12">
-      	  <input type="text" value={this.state.name} onChange={this.handleChange.bind(this)} />
-      	</div>
-      	<div className="col-xs-12 text-center">
-      	  <a className="btn btn-lg" onClick={this.onLectureStart.bind(this)}>Start Lecture</a>
-      	</div>
+      <div className="lecture-maker">
+        <input type="text" value={this.state.name} onChange={this.handleChange.bind(this)} placeholder="Enter lecture name" />
+      	<div className="button green" onClick={this.onLectureStart.bind(this)}>Start Lecture</div>
       </div>
   	)
 	}

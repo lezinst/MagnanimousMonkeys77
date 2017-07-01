@@ -139,17 +139,16 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <nav className="navbar navbar-default">
-          <span className="navbar-brand">ThumbsCheck</span>
-        </nav>
-        <div className="row">
-          <div className="col-xs-10">
+        <div className="nav">
+          <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+          <span className="nav-brand">ThumbsCheck</span>
+        </div>
+        <div className="wrapper">
             {this.state.view === 'login'
               ? <Login onSignIn={this.onSignIn.bind(this)}/>
               : this.state.view === 'student'
               ? <Student thumbValue={this.state.thumbValue} changeThumbValue={this.changeThumbValue.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} countdown={this.state.countdown} view={this.state.view} endLectureStudent={this.endLectureStudent.bind(this)} />
             : <Instructor thumbValue={this.state.thumbValue} lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} countdown={this.state.countdown} changeThumbValue={this.changeThumbValue.bind(this)} clearThumbsCheck={this.clearThumbsCheck.bind(this)} view={this.state.view} /> }
-          </div>
         </div>
       </div>
     )

@@ -21,8 +21,7 @@ class Instructor extends React.Component {
 
   render () {
     return (
-      <div>
-        <h1>Instructor Component</h1>
+      <div className="view view-instructor">
         {this.props.lectureStatus === 'lectureNotStarted'
          ? <LectureMaker startLecture={this.props.startLecture}/>
          : this.props.lectureStatus === 'lectureStarted'

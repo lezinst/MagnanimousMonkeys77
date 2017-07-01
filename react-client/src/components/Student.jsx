@@ -25,12 +25,12 @@ class Student extends React.Component {
 
   render () {
     return (
-      <div className="col-xs-10">
+      <div className="view">
         {this.props.lectureStatus === 'lectureNotStarted'
         ? <Waiting waitingFor={'lecture'} />
         : this.props.lectureStatus === 'lectureStarted'
         ? <Waiting waitingFor={'question'} />
-      : <ThumbInput countdown={this.props.countdown} thumbValue={this.props.thumbValue} changeThumbValue={this.props.changeThumbValue} />}
+        : <ThumbInput countdown={this.props.countdown} thumbValue={this.props.thumbValue} changeThumbValue={this.props.changeThumbValue} />}
       </div>
     )
   }

@@ -19,13 +19,14 @@ class Login extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="view view-login">
         <GoogleLogin
           clientId="430160456638-mmtpqlu3h8t0nkum0tlo167d492gvbmf.apps.googleusercontent.com"
           buttonText="Login with Google"
           onSuccess={this.props.onSignIn}
           onFailure={this.responseGoogle.bind(this)}
           isSignedIn={true}
+          className="button button-login"
         />
       </div>
     )
