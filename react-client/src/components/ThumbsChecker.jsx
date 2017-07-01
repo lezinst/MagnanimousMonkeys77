@@ -14,7 +14,7 @@ class ThumbsChecker extends React.Component {
 	render () {
 		return (
 			<div className="row">
-				<div className="col-xs-12 text-center">
+				<div className="col-xs-12 text-center heading">
 					Class average
 				</div>
 				<ThumbVisualization

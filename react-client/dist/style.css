@@ -11,7 +11,7 @@
 }
 
 .form-control {
-  margin-top: 36vh !important;
+  margin-top: 24vh !important;
   padding-top: 18px !important; padding-bottom: 18px !important;
 }
 
@@ -19,7 +19,7 @@
   border-radius: 96px !important;
   padding-top: 6px !important; padding-bottom: 6px !important;
   width: 64vw !important;
-  margin-top: 36vh !important;
+  margin-top: 24vh !important;
 }
 
 .btn-success {
@@ -39,6 +39,10 @@
 }
 
 p {
-  margin-top: 36vh !important;
+  margin-top: 24vh !important;
   padding-top: 6px !important; padding-bottom: 6px !important;
+}
+
+.heading {
+  margin-bottom: 48px;
 }

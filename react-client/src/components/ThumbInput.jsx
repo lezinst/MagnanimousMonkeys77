@@ -15,8 +15,8 @@ class ThumbInput extends React.Component {
     return (
       <div className="col-xs-12">
         <div class="row">
-          <div className="col-xs-12 text-center">
-  					Your thumb
+          <div className="col-xs-12 text-center heading">
+  					Input your thumb
           </div>
 				</div>
         <div className="row">
@@ -25,7 +25,7 @@ class ThumbInput extends React.Component {
               vertical
               min={0}
               max={4}
-              marks={{0:'Down', 1:'–', 2:'Middle', 3:'–', 4:'Up'}}
+              marks={{0:'Down', 1:'–', 2:'Mid', 3:'–', 4:'Up'}}
               step={null}
               onChange={this.props.changeThumbValue}
               defaultValue={2}

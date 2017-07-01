@@ -11,12 +11,12 @@ class Waiting extends React.Component {
       <div className="col-xs-12 text-center">
         {this.props.waitingFor === 'lecture'
         ? <div>
-            <p>Hi {this.props.givenName}, welcome to ThumbsCheck!</p>
+            <p>Hi {this.props.givenName}!</p>
             <p>Please wait for a lecture to start.</p>
           </div>
         : <div>
             <p>Now in lecture!</p>
-            <p>Please wait for a question.</p>  
+            <p>Please wait for a question.</p>
           </div>}
       </div>
     )
