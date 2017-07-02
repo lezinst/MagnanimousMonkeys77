@@ -8,10 +8,8 @@ import React from 'react';
 
 	 render() {
 	 	return (
-		  <div className="row">
-		    <div className="col-xs-12 text-center">
-          <i style={{transform: `rotate(${(45 * this.props.thumbValue) - 180}deg)`, fontSize: '212px'}} className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-		    </div>
+		  <div className="col-xs-12 thumb-visualization text-center">
+        <i style={{transform: `rotate(${(45 * this.props.thumbValue) - 180}deg)`, transition: "300ms ease all"}} className="fa fa-thumbs-o-up" aria-hidden="true"></i>
 		  </div>
 	  );
 	 }
