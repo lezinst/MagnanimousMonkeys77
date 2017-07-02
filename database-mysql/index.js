@@ -15,9 +15,10 @@ var pool  = mysql.createPool({
   database : process.env.DB_NAME || 'thumbscheck'
 });
 
+
 console.log(`db connection: DB_HOST ${process.env.DB_HOST}, DB_USERNAME ${process.env.DB_USERNAME}, DB_PASSWORD ${process.env.DB_PASSWORD}, DB_NAME ${process.env.DB_NAME}`);
 
-const getUserType = function(gmail) {
+exports.getUserType = function(gmail) {
   return new Promise ((resolve, reject) => {
     pool.query(`SELECT user_type FROM users WHERE gmail = "${gmail}"`, (err, results) => {
       if (err) {
@@ -29,7 +30,7 @@ const getUserType = function(gmail) {
   })
 }
 
-const createNewLecture = function(name) {
+exports.createNewLecture = function(name) {
   return new Promise ((resolve, reject) => {
     pool.query(`INSERT INTO lectures (name) VALUES ("${name}")`, (err, results) => {
       if (err) {
@@ -41,7 +42,7 @@ const createNewLecture = function(name) {
   })
 }
 
-const createNewQuestion = function(lectureId) {
+exports.createNewQuestion = function(lectureId) {
   return new Promise ((resolve, reject) => {
     pool.query(`INSERT INTO questions (lecture_id) VALUES ("${lectureId}")`, (err, results) => {
       if (err) {
@@ -53,7 +54,10 @@ const createNewQuestion = function(lectureId) {
   })
 }
 
-const addAvgThumbForQuestion = function(questionId, avgThumbValue) {
+/* Section
+*/
+
+exports.addAvgThumbForQuestion = function(questionId, avgThumbValue) {
   return new Promise ((resolve, reject) => {
     pool.query(`UPDATE questions SET average_thumb_question=${avgThumbValue} WHERE id=${questionId}`, (err, results) => {
       if (err) {
@@ -65,7 +69,7 @@ const addAvgThumbForQuestion = function(questionId, avgThumbValue) {
   })
 }
 
-const addAvgThumbForLecture = function(lectureId, avgThumbValue) {
+exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   return new Promise ((resolve, reject) => {
     pool.query(`UPDATE lectures SET average_thumb_lecture=${avgThumbValue} WHERE id=${lectureId}`, (err, results) => {
       if (err) {
@@ -77,9 +81,42 @@ const addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   })
 }
 
+// section
 
-module.exports.addAvgThumbForLecture = addAvgThumbForLecture;
-module.exports.addAvgThumbForQuestion = addAvgThumbForQuestion;
-module.exports.createNewQuestion = createNewQuestion;
-module.exports.createNewLecture = createNewLecture;
-module.exports.getUserType = getUserType;
+exports.createThumbData = function(userId, questionId, thumbsValue) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`INSERT INTO thumbs (user_id, question_id, thumb_value) VALUES (${userId}, ${questionId}, ${thumbsValue})`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+exports.getUserId = function(gmail) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`SELECT id FROM users WHERE gmail = "${gmail}"`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+// test
+
+/*
+var prom1 = exports.getUserId('caaker.0@gmail.com');
+prom1.then(results => {
+  console.log(results[0].id);
+});
+
+var prom2 = exports.createThumbData(4, 1, 5);
+prom2.then(results => {
+  console.log(results);
+});
+*/
