@@ -25,12 +25,22 @@ class Student extends React.Component {
 
   render () {
     return (
-      <div className="col-xs-10">
+      <div className="row">
         {this.props.lectureStatus === 'lectureNotStarted'
-        ? <Waiting waitingFor={'lecture'} />
+        ? <Waiting
+            waitingFor={'lecture'}
+            givenName={this.props.givenName}
+          />
         : this.props.lectureStatus === 'lectureStarted'
-        ? <Waiting waitingFor={'question'} />
-      : <ThumbInput countdown={this.props.countdown} thumbValue={this.props.thumbValue} changeThumbValue={this.props.changeThumbValue} />}
+        ? <Waiting
+            waitingFor={'question'}
+            givenName={this.props.givenName}
+          />
+        : <ThumbInput
+            countdown={this.props.countdown}
+            thumbValue={this.props.thumbValue}
+            changeThumbValue={this.props.changeThumbValue}
+          />}
       </div>
     )
   }

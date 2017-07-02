@@ -1,5 +1,5 @@
 import React from 'react';
-import LectureMaker from './LectureMaker.jsx';
+import LectureStarter from './LectureStarter.jsx';
 import LectureButtons from './LectureButtons.jsx';
 import ThumbsChecker from './ThumbsChecker.jsx';
 
@@ -22,13 +22,23 @@ class Instructor extends React.Component {
   render () {
     return (
       <div>
-        <h1>Instructor Component</h1>
         {this.props.lectureStatus === 'lectureNotStarted'
-         ? <LectureMaker startLecture={this.props.startLecture}/>
-         : this.props.lectureStatus === 'lectureStarted'
-         ? <LectureButtons lectureId={this.props.lectureId} startThumbsCheck={this.props.startThumbsCheck} endLecture={this.props.endLecture} />
-       : <ThumbsChecker startLecture={this.props.startLecture} lectureId={this.props.lectureId} countdown={this.props.countdown} thumbValue={this.props.thumbValue} clearThumbsCheck={this.props.clearThumbsCheck}/>
-        }
+          ? <LectureStarter
+              startLecture={this.props.startLecture}
+            />
+          : this.props.lectureStatus === 'lectureStarted'
+          ? <LectureButtons
+              lectureId={this.props.lectureId}
+              startThumbsCheck={this.props.startThumbsCheck}
+              endLecture={this.props.endLecture}
+            />
+          : <ThumbsChecker
+            startLecture={this.props.startLecture}
+            lectureId={this.props.lectureId}
+            countdown={this.props.countdown}
+            thumbValue={this.props.thumbValue}
+            clearThumbsCheck={this.props.clearThumbsCheck}
+          />}
       </div>
     )
   }

@@ -21,7 +21,8 @@ class App extends React.Component {
       lectureId: '',
       questionId:'',
       thumbValue: 2,
-      countdown: 10
+      countdown: 10,
+      givenName: ''
     }
   }
 
@@ -44,6 +45,7 @@ class App extends React.Component {
       } else if (result.data[0].user_type === 'INSTRUCTOR') {
         this.setState({ view: 'instructor'});
       }
+      this.setState({ givenName: googleUser.profileObj.givenName })
       socket.emit('username', { username: googleUser.profileObj.email })
       if(result.data[0].user_type === 'INSTRUCTOR'){
         socket.emit('instructor', { username: googleUser.profileObj.email })
@@ -75,7 +77,6 @@ class App extends React.Component {
       })
     })
   }
-  //tell the student to go to the lectureNotStarted state
 
   endLectureStudent () {
     this.setState({
@@ -139,17 +140,46 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <nav className="navbar navbar-default">
-          <span className="navbar-brand">ThumbsCheck</span>
-        </nav>
-        <div className="row">
-          <div className="col-xs-10">
-            {this.state.view === 'login'
-              ? <Login onSignIn={this.onSignIn.bind(this)}/>
-              : this.state.view === 'student'
-              ? <Student thumbValue={this.state.thumbValue} changeThumbValue={this.changeThumbValue.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} startLecture={this.startLecture.bind(this)} lectureStatus={this.state.lectureStatus} countdown={this.state.countdown} view={this.state.view} endLectureStudent={this.endLectureStudent.bind(this)} />
-            : <Instructor thumbValue={this.state.thumbValue} lectureId={this.state.lectureId} lectureStatus={this.state.lectureStatus} startLecture={this.startLecture.bind(this)} endLecture={this.endLecture.bind(this)} startThumbsCheck={this.startThumbsCheck.bind(this)} countdown={this.state.countdown} changeThumbValue={this.changeThumbValue.bind(this)} clearThumbsCheck={this.clearThumbsCheck.bind(this)} view={this.state.view} /> }
+        <nav className="navbar navbar-default navbar-static-top">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <a className="navbar-brand">
+                <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                &nbsp; ThumbsCheck
+              </a>
+            </div>
           </div>
+        </nav>
+        <div className="container-fluid main">
+            {this.state.view === 'login'
+              ? <Login
+                  onSignIn={this.onSignIn.bind(this)}
+                />
+              : this.state.view === 'student'
+              ? <Student
+                  thumbValue={this.state.thumbValue}
+                  changeThumbValue={this.changeThumbValue.bind(this)}
+                  startThumbsCheck={this.startThumbsCheck.bind(this)}
+                  startLecture={this.startLecture.bind(this)}
+                  lectureStatus={this.state.lectureStatus}
+                  countdown={this.state.countdown}
+                  view={this.state.view}
+                  endLectureStudent={this.endLectureStudent.bind(this)}
+                  givenName={this.state.givenName}
+                />
+              : <Instructor
+                  thumbValue={this.state.thumbValue}
+                  lectureId={this.state.lectureId}
+                  lectureStatus={this.state.lectureStatus}
+                  startLecture={this.startLecture.bind(this)}
+                  endLecture={this.endLecture.bind(this)}
+                  startThumbsCheck={this.startThumbsCheck.bind(this)}
+                  countdown={this.state.countdown}
+                  changeThumbValue={this.changeThumbValue.bind(this)}
+                  clearThumbsCheck={this.clearThumbsCheck.bind(this)}
+                  view={this.state.view}
+                  givenName={this.state.givenName}
+                />}
         </div>
       </div>
     )
