@@ -21,7 +21,7 @@ class App extends React.Component {
       lectureId: '',
       questionId:'',
       thumbValue: 2,
-      countdown: 10,
+      countdown: 30,
       givenName: ''
     }
   }
@@ -103,7 +103,7 @@ class App extends React.Component {
       this.setState({
         lectureStatus: 'lectureStarted',
         questionId: '',
-        countdown: 10
+        countdown: 30
       })
     }
   }
@@ -126,7 +126,7 @@ class App extends React.Component {
     this.setState({
       lectureStatus: 'lectureStarted',
       questionId: '',
-      countdown: 10
+      countdown: 30
     })
   }
 
