@@ -8,6 +8,7 @@ var pool  = mysql.createPool({
   database : process.env.DB_NAME || 'thumbscheck'
 });
 
+
 console.log(`db connection: DB_HOST ${process.env.DB_HOST}, DB_USERNAME ${process.env.DB_USERNAME}, DB_PASSWORD ${process.env.DB_PASSWORD}, DB_NAME ${process.env.DB_NAME}`);
 
 exports.getUserType = function(gmail) {
@@ -73,6 +74,7 @@ exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   })
 }
 
+
 /* Section
 */
 
@@ -100,6 +102,23 @@ exports.getUserId = function(gmail) {
   })
 }
 
+
+exports.addStudent = function(first, last, gmail) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("${first}", "${last}", "${gmail}", "STUDENT");`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
+// test
+
+/*
+=======
 /* Section
 */
 
@@ -123,7 +142,7 @@ prom1.then(results => {
   console.log(results[0].id);
 });
 
-// 2
+//2
 var prom2 = exports.createThumbData(4, 1, 5);
 prom2.then(results => {
   console.log(results);
@@ -133,4 +152,3 @@ prom2.then(results => {
 asyncTimeout(3000, function(){console.log('done')}).then(function(){console.log('continue')})
 
 */
-
