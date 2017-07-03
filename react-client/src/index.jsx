@@ -22,7 +22,8 @@ class App extends React.Component {
       questionId:'',
       thumbValue: 2,
       countdown: 30,
-      givenName: ''
+      givenName: '',
+      lectureName: ''
     }
   }
 
@@ -54,10 +55,11 @@ class App extends React.Component {
 
   }
 
-  startLecture (lectureId) {
+  startLecture (lectureId, lectureName) {
     this.setState({
       lectureStatus: 'lectureStarted',
       lectureId: lectureId,
+      lectureName: lectureName
     })
   }
 
@@ -166,6 +168,7 @@ class App extends React.Component {
                   view={this.state.view}
                   endLectureStudent={this.endLectureStudent.bind(this)}
                   givenName={this.state.givenName}
+                  lectureName={this.state.lectureName}
                 />
               : <Instructor
                   thumbValue={this.state.thumbValue}
@@ -179,6 +182,7 @@ class App extends React.Component {
                   clearThumbsCheck={this.clearThumbsCheck.bind(this)}
                   view={this.state.view}
                   givenName={this.state.givenName}
+                  lectureName={this.state.lectureName}
                 />}
         </div>
       </div>
