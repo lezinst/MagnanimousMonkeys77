@@ -74,13 +74,25 @@ exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   })
 }
 
+exports.getAvgThumbsForQuestionsInLecture = function(lectureId) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`SELECT average_thumb_question FROM questions WHERE lecture_id=${lectureId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
 
 /* Section
 */
 
-exports.createThumbData = function(userId, questionId, thumbsValue) {
+exports.createThumbData = function(gmail, questionId, thumbsValue) {
   return new Promise ((resolve, reject) => {
-    pool.query(`INSERT INTO thumbs (user_id, question_id, thumb_value) VALUES (${userId}, ${questionId}, ${thumbsValue})`, (err, results) => {
+    pool.query(`INSERT INTO thumbs (user_id, question_id, thumb_value) VALUES ((SELECT id FROM users WHERE gmail="${gmail}"), ${questionId}, ${thumbsValue})`, (err, results) => {
       if (err) {
         console.log(err);
       } else {
