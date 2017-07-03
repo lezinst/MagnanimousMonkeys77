@@ -55,7 +55,10 @@ app.post('/lecture', (req, res) => {
   .then(results => {
     lectureId = results.insertId;
     res.send({ lectureId: lectureId });
-    io.emit('lectureStarted', { lectureId: lectureId })
+    io.emit('lectureStarted', {
+      lectureId: lectureId,
+      lectureName: name
+    })
   })
 })
 

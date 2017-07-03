@@ -15,7 +15,7 @@ class Waiting extends React.Component {
             <p>Please wait for a lecture to start.</p>
           </div>
         : <div>
-            <p>Now in lecture!</p>
+            <p>Now in lecture: {this.props.lectureName}</p>
             <p>Please wait for a question.</p>
           </div>}
       </div>
