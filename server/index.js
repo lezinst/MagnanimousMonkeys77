@@ -20,12 +20,28 @@ var instructorId = '';  // this will be the socket.id
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.get('/login', (req, res) => {
+  var googleResults;
   google.verifyToken(req.query.tokenId, '430160456638-mmtpqlu3h8t0nkum0tlo167d492gvbmf.apps.googleusercontent.com')
-  .then(gmail => {
-    db.getUserType(gmail)
-    .then(result => {
-     res.status(200).send(result);
-    })
+  .then(fromGoogle => {
+    googleResults = fromGoogle;
+    return db.getUserType(fromGoogle.gmail);
+  })
+  .then(result => {
+    console.log(result);
+    if (result.length === 0) {
+      //add user to db
+      console.log(`add user to db, ${googleResults.gmail}`);
+      return db.addStudent(googleResults.first, googleResults.last, googleResults.gmail);
+    } else {
+      res.status(200).send(result);
+    }
+  })
+  .then(result => {
+    console.log(result);
+    return db.getUserType(googleResults.gmail);
+  })
+  .then(result => {
+    res.status(201).send(result);
   })
 })
 
