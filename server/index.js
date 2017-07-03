@@ -121,15 +121,17 @@ io.on('connection', function (socket) {
 
   //recieve the thumb value from the student
   socket.on('thumbValue', data => {
-    if (!thumbs.hasStudent(socket.username)) {
-      let student = new Student(socket.username, socket.id);
-      thumbs.addStudent(student);
+    if (thumbs) {
+      if (!thumbs.hasStudent(socket.username)) {
+        let student = new Student(socket.username, socket.id);
+        thumbs.addStudent(student);
+      }
+      thumbs.setThumbValueForStudent(socket.username, data.thumbValue);
+      let average = thumbs.getAverageThumbValue();
+      io.emit('averageThumbValue', { averageThumbValue: average });
+      console.log(`sending averageThumbValue of ${average}`);
+      console.log(`thumb value for ${socket.username} is ${data.thumbValue}`);
     }
-    thumbs.setThumbValueForStudent(socket.username, data.thumbValue);
-    let average = thumbs.getAverageThumbValue();
-    io.emit('averageThumbValue', { averageThumbValue: average });
-    console.log(`sending averageThumbValue of ${average}`);
-    console.log(`thumb value for ${socket.username} is ${data.thumbValue}`);
   })
 });
 
