@@ -19,7 +19,7 @@ class ThumbInput extends React.Component {
   					Input your thumb
           </div>
 				</div>
-        <div className="row">
+        <div className="row student">
           <div className="col-xs-2" style={{height: "200px", marginLeft: "6px"}}>
             <Slider
               vertical

@@ -34,6 +34,10 @@
   font-size: 212px !important;
 }
 
+.student .col-xs-2 {
+  margin-left: 36px !important;
+}
+
 .countdown {
   font-size: 96px !important;
 }
