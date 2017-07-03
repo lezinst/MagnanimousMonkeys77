@@ -63,6 +63,13 @@ app.post('/checkthumbs', (req, res) => {
     thumbs = new ThumbsData(lectureId, questionId);
     //Emit the new question to students here
     io.emit('checkingThumbs', { questionId: questionId });
+    //This will add thumbsdata in the db after the question ends
+    db.asyncTimeout(12000, () => {
+      for (let student in thumbs.students) {
+        //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
+        db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
+      }
+    });
     //send the response to the teacher
     res.send({ questionId: questionId });
   })
