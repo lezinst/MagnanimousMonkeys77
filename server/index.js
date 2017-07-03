@@ -34,6 +34,7 @@ app.get('/login', (req, res) => {
       return db.addStudent(googleResults.first, googleResults.last, googleResults.gmail);
     } else {
       res.status(200).send(result);
+      throw ('early exit from promise chain');
     }
   })
   .then(result => {
@@ -42,6 +43,9 @@ app.get('/login', (req, res) => {
   })
   .then(result => {
     res.status(201).send(result);
+  })
+  .catch(err => {
+    console.log(err);
   })
 })
 
@@ -64,7 +68,7 @@ app.post('/checkthumbs', (req, res) => {
     //Emit the new question to students here
     io.emit('checkingThumbs', { questionId: questionId });
     //This will add thumbsdata in the db after the question ends
-    db.asyncTimeout(12000, () => {
+    db.asyncTimeout(32000, () => {
       for (let student in thumbs.students) {
         //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
         db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
