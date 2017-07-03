@@ -69,6 +69,7 @@ app.post('/checkthumbs', (req, res) => {
         //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
         db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
       }
+      db.addAvgThumbForQuestion(questionId, thumbs.getAverageThumbValue());
     });
     //send the response to the teacher
     res.send({ questionId: questionId });
