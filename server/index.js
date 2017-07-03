@@ -63,6 +63,14 @@ app.post('/checkthumbs', (req, res) => {
     thumbs = new ThumbsData(lectureId, questionId);
     //Emit the new question to students here
     io.emit('checkingThumbs', { questionId: questionId });
+    //This will add thumbsdata in the db after the question ends
+    db.asyncTimeout(12000, () => {
+      for (let student in thumbs.students) {
+        //console.log(`${thumbs.students[student].gmail}, ${thumbs.questionId}, ${thumbs.students[student].thumbValue}`);
+        db.createThumbData(thumbs.students[student].gmail, thumbs.questionId, thumbs.students[student].thumbValue);
+      }
+      db.addAvgThumbForQuestion(questionId, thumbs.getAverageThumbValue());
+    });
     //send the response to the teacher
     res.send({ questionId: questionId });
   })
@@ -73,6 +81,18 @@ app.post('/endLecture', (req, res) => {
   // calculate the average for all thumbs in lecture
   // and store it in the database
   io.emit('lectureEnded', { response: 'ok' });
+
+  db.getAvgThumbsForQuestionsInLecture(lectureId)
+  .then(results => {
+    console.log(results);
+    let sum = 0;
+    let avg = 0;
+    for (let i = 0; i < results.length; i++) {
+      sum += results[i].average_thumb_question;
+    }
+    avg = (sum / results.length);
+    db.addAvgThumbForLecture(lectureId, avg);
+  });
   res.status(200).send('end lecture');
 });
 
@@ -129,7 +149,7 @@ class ThumbsData {
     let count = 0;
     let total = 0;
     for (let student in this.students) {
-      if (this.students[student].thumbValue) {
+      if (this.students[student].thumbValue || this.students[student].thumbValue === 0) {
         count++;
         total += this.students[student].thumbValue;
       }
