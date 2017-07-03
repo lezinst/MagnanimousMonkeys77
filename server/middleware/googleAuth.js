@@ -14,7 +14,14 @@ const verifyToken = function(token, clientID) {
         if (login) {
          var payload = login.getPayload();
          var gmail = payload['email'];
-         resolve(gmail);
+         var first = payload['given_name'];
+         var last = payload['family_name'];
+         var result = {
+          gmail: gmail,
+          first: first,
+          last: last 
+         }
+         resolve(result);
        } else {
         reject("invalid token");
        }

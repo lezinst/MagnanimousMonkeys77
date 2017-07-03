@@ -107,6 +107,18 @@ exports.getUserId = function(gmail) {
   })
 }
 
+exports.addStudent = function(first, last, gmail) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("${first}", "${last}", "${gmail}", "STUDENT");`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
 // test
 
 /*

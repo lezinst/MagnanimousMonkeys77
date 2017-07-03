@@ -23,6 +23,7 @@ class Login extends React.Component {
         <div className="col-xs-12 text-center">
           <GoogleLogin
             clientId="430160456638-mmtpqlu3h8t0nkum0tlo167d492gvbmf.apps.googleusercontent.com"
+            scope="profile email"
             buttonText="Login with Google"
             onSuccess={this.props.onSignIn}
             onFailure={this.responseGoogle.bind(this)}
