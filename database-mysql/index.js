@@ -1,12 +1,5 @@
 var mysql = require('mysql');
 
-// var connection = mysql.createConnection({
-//   host     : process.env.DB_HOST || 'localhost',
-//   user     : process.env.DB_USERNAME || 'root',
-//   password : process.env.DB_PASSWORD || 'plantlife',
-//   database : process.env.DB_NAME || 'thumbscheck'
-// });
-
 var pool  = mysql.createPool({
   connectionLimit : 10,
   host     : process.env.DB_HOST || 'localhost',
@@ -81,7 +74,9 @@ exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   })
 }
 
-// section
+
+/* Section
+*/
 
 exports.createThumbData = function(userId, questionId, thumbsValue) {
   return new Promise ((resolve, reject) => {
@@ -107,6 +102,7 @@ exports.getUserId = function(gmail) {
   })
 }
 
+
 exports.addStudent = function(first, last, gmail) {
   return new Promise ((resolve, reject) => {
     pool.query(`INSERT INTO users (first_name, last_name, gmail, user_type) VALUES ("${first}", "${last}", "${gmail}", "STUDENT");`, (err, results) => {
@@ -122,13 +118,37 @@ exports.addStudent = function(first, last, gmail) {
 // test
 
 /*
+=======
+/* Section
+*/
+
+exports.asyncTimeout = function(time, callback) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let results = 'no callback';
+      if (callback) {
+        results = callback();
+      }
+      resolve(results);
+    }, time || 1000);
+  });
+}
+
+/* Test Functions
+
+// 1
 var prom1 = exports.getUserId('caaker.0@gmail.com');
 prom1.then(results => {
   console.log(results[0].id);
 });
 
+//2
 var prom2 = exports.createThumbData(4, 1, 5);
 prom2.then(results => {
   console.log(results);
 });
+
+// 3
+asyncTimeout(3000, function(){console.log('done')}).then(function(){console.log('continue')})
+
 */
