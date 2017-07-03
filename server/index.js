@@ -81,6 +81,18 @@ app.post('/endLecture', (req, res) => {
   // calculate the average for all thumbs in lecture
   // and store it in the database
   io.emit('lectureEnded', { response: 'ok' });
+
+  db.getAvgThumbsForQuestionsInLecture(lectureId)
+  .then(results => {
+    console.log(results);
+    let sum = 0;
+    let avg = 0;
+    for (let i = 0; i < results.length; i++) {
+      sum += results[i].average_thumb_question;
+    }
+    avg = (sum / results.length);
+    db.addAvgThumbForLecture(lectureId, avg);
+  });
   res.status(200).send('end lecture');
 });
 

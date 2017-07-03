@@ -74,6 +74,18 @@ exports.addAvgThumbForLecture = function(lectureId, avgThumbValue) {
   })
 }
 
+exports.getAvgThumbsForQuestionsInLecture = function(lectureId) {
+  return new Promise ((resolve, reject) => {
+    pool.query(`SELECT average_thumb_question FROM questions WHERE lecture_id=${lectureId}`, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        resolve(results);
+      }
+    });
+  })
+}
+
 
 /* Section
 */
