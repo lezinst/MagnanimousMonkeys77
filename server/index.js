@@ -136,7 +136,7 @@ class ThumbsData {
     let count = 0;
     let total = 0;
     for (let student in this.students) {
-      if (this.students[student].thumbValue) {
+      if (this.students[student].thumbValue || this.students[student].thumbValue === 0) {
         count++;
         total += this.students[student].thumbValue;
       }
